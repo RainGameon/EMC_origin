@@ -1,0 +1,100 @@
+# --- Qatten specific parameters ---
+
+# use epsilon greedy action selector
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+#epsilon_anneal_time: 50000
+epsilon_anneal_time: 200000 # smy改
+
+runner: "episode"
+
+buffer_size: 5000
+
+# update the target network every {} episodes
+target_update_interval: 200
+
+# use the Q_Learner to train
+agent_output_type: "q"
+learner: "qplex_curiosity_vdn_learner_inf"
+double_q: True
+mixer: "dmaq_qatten"
+mixing_embed_dim: 32
+hypernet_embed: 64
+adv_hypernet_layers: 1
+adv_hypernet_embed: 64
+
+num_kernel: 4
+is_minus_one: True
+is_adv_attention: True
+is_stop_gradient: True
+
+# Qatten coefficient
+n_head: 4
+attend_reg_coef: 0.001
+state_bias: True
+mask_dead: False
+weighted_head: False
+nonlinear: False
+
+num_circle: 1 #2
+# SUNMENGYAO_________
+curiosity_scale: 0.0
+curiosity_decay: True
+curiosity_decay_rate: 0.9
+curiosity_decay_cycle: 200000
+curiosity_decay_stop: 0.01
+
+save_buffer: False
+
+
+
+
+mac: "fast_mac"
+#agent: "rnn_individualQ"
+#use_individual_Q: True
+agent: "rnn_fast"
+use_individual_Q: False
+individual_q_loss_weight: 0.01
+
+is_prioritized_buffer: False
+use_emdqn: True
+emdqn_loss_weight: 0.01
+
+emdqn_buffer_size: 1000000
+emdqn_latent_dim: 4
+
+soft_update_tau: 0.005  # 可以试试0.05
+vdn_soft_update: True
+predict_vdn_target: True
+predict2_vdn_target: True
+use_qtotal_td: False
+name: "EMC_sc2_6h_vs_8z"
+
+# EMVP添加
+gamma: 0.99
+update_memory_internal: 1000 #1000 # 5000
+value_propagation_max_t: 90000
+value_propagation_state_t: 0
+updata_batchsize: 128
+memory_lambda: 0.99
+
+# influence reward
+is_use_influence: False   #True
+beta1: 0.08                               # 0.005
+beta2: 0.005
+beta: 0.5                                  # 0.5
+predictor_lr: 0.0005
+predict_net_dim: 256  #128
+
+influence_exp_decay: True
+influence_exp_decay_rate: 0.0
+influence_exp_decay_cycle: 100000
+influence_exp_decay_stop: 0.0001
+
+
+
+lambda_kl        : 0.0001  # for predict_vae
+
+# value propagation
+is_value_propagation: False
